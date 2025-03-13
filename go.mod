@@ -7,6 +7,7 @@ require (
 	github.com/jackc/pgx/v5 v5.7.2
 	github.com/prometheus/client_golang v1.21.1
 	go.uber.org/zap v1.27.0
+	golang.org/x/net v0.37.0
 	golang.org/x/sync v0.12.0
 	google.golang.org/grpc v1.71.0
 )
@@ -24,9 +25,8 @@ require (
 	github.com/prometheus/procfs v0.15.1 // indirect
 	go.uber.org/multierr v1.10.0 // indirect
 	golang.org/x/crypto v0.36.0 // indirect
-	golang.org/x/net v0.37.0 // indirect
 	golang.org/x/sys v0.31.0 // indirect
 	golang.org/x/text v0.23.0 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20250311190419-81fb87f6b8bf // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20250313182123-33a14cd5fa76 // indirect
 	google.golang.org/protobuf v1.36.5 // indirect
 )
