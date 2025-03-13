@@ -13,7 +13,7 @@ func DoAtomic(
 	pool *pgxpool.Pool,
 	handle func(context.Context, pgx.Tx) error,
 ) error {
-	if err := DoAtomicWithOptions(ctx, pool, pgx.TxOptions{}, handle); err != nil {
+	if err := DoAtomicWithOptions(ctx, pool, &pgx.TxOptions{}, handle); err != nil {
 		return fmt.Errorf("do atomic with options: %w", err)
 	}
 
@@ -23,17 +23,17 @@ func DoAtomic(
 func DoAtomicWithOptions(
 	ctx context.Context,
 	pool *pgxpool.Pool,
-	txOptions pgx.TxOptions,
+	txOptions *pgx.TxOptions,
 	handle func(context.Context, pgx.Tx) error,
 ) error {
-	tx, err := pool.BeginTx(ctx, txOptions)
+	tx, err := pool.BeginTx(ctx, *txOptions)
 	if err != nil {
 		return fmt.Errorf("begin tx: %w", err)
 	}
 
 	if err = handle(ctx, tx); err != nil {
 		if rbErr := tx.Rollback(ctx); rbErr != nil {
-			return fmt.Errorf("%v: rollback tx: %w", err, rbErr)
+			return fmt.Errorf("%w: rollback tx: %w", err, rbErr)
 		}
 
 		return fmt.Errorf("do atomic operation on tx: %w", err)

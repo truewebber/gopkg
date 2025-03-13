@@ -15,8 +15,10 @@ type Server interface {
 	Shutdown() error
 }
 
-var errServerIsNil = errors.New("server is nil")
-var errListenerIsNil = errors.New("listener is nil")
+var (
+	errServerIsNil   = errors.New("server is nil")
+	errListenerIsNil = errors.New("listener is nil")
+)
 
 type HTTPWrapper struct {
 	server *http.Server
