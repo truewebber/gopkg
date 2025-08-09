@@ -42,12 +42,14 @@ func (s *Starter) startServers(ctx context.Context, cancel context.CancelFunc) {
 
 		serveWithWgRelease := func(cancel context.CancelFunc, server Server) {
 			defer wg.Done()
+
 			s.serveWithCancelOnFinish(cancel, server)
 		}
 		go serveWithWgRelease(cancel, server)
 
 		shutdownWithWgRelease := func(ctx context.Context, server Server) {
 			defer wg.Done()
+
 			s.shutdownOnClosedContext(ctx, server)
 		}
 		go shutdownWithWgRelease(ctx, server)

@@ -17,9 +17,9 @@ func TestNormalizeWithOptions(t *testing.T) {
 	}
 
 	tests := []struct {
+		want    *url.URL
 		name    string
 		args    args
-		want    *url.URL
 		wantErr bool
 	}{
 		// cases from https://en.wikipedia.org/wiki/URI_normalization
