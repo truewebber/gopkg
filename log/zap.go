@@ -69,8 +69,9 @@ func isSyncInvalidError(err error) bool {
 	}
 
 	switch {
-	case errors.Is(pathErr.Err, syscall.ENOTTY):
-	case errors.Is(pathErr.Err, syscall.EINVAL):
+	case errors.Is(pathErr.Err, syscall.ENOTTY): // inappropriate ioctl for device
+	case errors.Is(pathErr.Err, syscall.EINVAL): // invalid argument
+	case errors.Is(pathErr.Err, syscall.EBADF):  // bad file descriptor (happens during shutdown)
 	default:
 		return false
 	}
